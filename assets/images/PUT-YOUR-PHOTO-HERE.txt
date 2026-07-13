@@ -1,0 +1,21 @@
+HOW TO ADD YOUR PROFILE PHOTO
+==============================
+Save your photo as exactly:   profile.jpg
+in this folder (assets/images/). That's it — it's used in two places
+automatically once the file exists:
+  1. A small circular photo in the top-left navbar (click it to view
+     full-screen).
+  2. A full-bleed photo behind the "Hi, I'm Tuhin Santra" hero text, faded
+     into the dark background with a gradient (no code changes needed).
+
+TIP FOR THE BEST LOOK
+----------------------
+The hero photo blends into the dark background using a gradient overlay,
+but it blends most naturally if the photo itself already has a soft,
+blurred, or gradient-style background (a portrait/headshot style photo)
+rather than a busy photo background or a hard-edged studio backdrop.
+Free tools like remove.bg (to cut out the background) or Canva can help
+create this style if you don't already have a photo like that.
+
+Delete this text file once you've added profile.jpg — it's just a
+placeholder note and isn't linked from the site.

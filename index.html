@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tuhin Santra | Business Analytics & Data Science Portfolio</title>
+<meta name="description" content="Portfolio of Tuhin Santra — Business Analytics & Data Science: Power BI, Excel, SQL, Python & Machine Learning projects." />
+
+<!--
+  ============================================================================
+  HOW THIS SITE IS ORGANIZED (read this first!)
+  ----------------------------------------------------------------------------
+  index.html          -> the text/structure of every section (edit YOUR text here)
+  style.css           -> all colors, fonts, spacing (rarely needs editing)
+  script.js           -> site behavior: menu, filters, popup viewer (rarely needs editing)
+  projects-data.js    -> THE FILE YOU EDIT TO ADD/REMOVE PROJECTS (see comments inside it)
+  assets/cv/          -> put your downloadable CV PDF here
+  assets/projects/    -> put your uploaded project PDFs / JPEGs here
+  assets/images/      -> put a profile photo here if you want one (optional)
+
+  Every section below is wrapped in a comment banner like:
+  <!-- ============ SECTION: ABOUT ============ -->
+  so you can quickly find and edit the section you want with Ctrl+F.
+  ============================================================================
+-->
+
+<!-- Google Fonts: Space Grotesk (headings), Inter (body text), IBM Plex Mono (data/labels) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ================================ NAVBAR ================================= -->
+<header class="navbar">
+  <div class="container">
+    <div class="brand-group">
+      <!-- Circular profile photo shown beside the brand name. Add your photo
+           at assets/images/profile.jpg and it will appear here automatically
+           (cropped to a circle, biased toward the top so your face shows).
+           Click it to view the full photo full-screen. If no photo is added,
+           it gracefully falls back to showing your initials instead. -->
+      <button class="brand-avatar-btn" id="brandAvatarBtn" aria-label="View profile photo">
+        <span class="brand-avatar-fallback">TS</span>
+        <img src="assets/images/profile.jpg" alt="Tuhin Santra" class="brand-avatar" onerror="this.style.display='none'">
+      </button>
+      <!-- EDIT: your initials / short brand mark -->
+      <a href="#home" class="brand">TS<span>.</span>portfolio</a>
+    </div>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ SECTION: HOME (A1) ============ -->
+<section id="home">
+  <!-- Photo backdrop removed — back to the plain dark grid background.
+       If you want the photo back later, re-add a div like this right here:
+       <div class="hero-photo-layer" style="background-image:
+           linear-gradient(160deg, rgba(45,212,196,0.10), rgba(242,153,74,0.08)),
+           linear-gradient(to right, var(--navy-deep) 0%, rgba(14,26,48,0.75) 22%, transparent 68%),
+           linear-gradient(to bottom, var(--navy-deep) 0%, transparent 20%),
+           linear-gradient(to top, var(--navy-deep) 0%, transparent 26%),
+           url('assets/images/profile.jpg');
+           background-position: center, center, center, center, center 18%;"></div>
+  -->
+
+  <div class="container hero-grid">
+    <div class="reveal">
+      <span class="eyebrow-tag">Available for opportunities</span>
+      <h1 class="hero-title">Hi, I'm <span class="accent-word">Tuhin Santra</span></h1>
+      <!-- EDIT: your role/title -->
+      <!-- EDIT: the rotating roles typed here are set in script.js — search
+           for "heroRoles" near the top of that file to add/remove/edit them. -->
+      <p class="hero-role"><span id="heroTypewriter"></span><span class="cursor"></span></p>
+      <!-- EDIT: short intro pulled from your CV summary -->
+      <p class="hero-desc">
+        Analytically driven MBA graduate with a background in finance, passionate about
+        transforming raw data into strategic business insights and growth opportunities
+        using Power BI, Excel, SQL, and Python.
+      </p>
+
+      <div class="hero-actions">
+        <!-- Download CV button: point this at your own PDF inside assets/cv/ -->
+        <a class="btn btn-primary" href="assets/cv/Tuhin_Santra_CV.pdf" download>&#8681; Download CV</a>
+        <a class="btn btn-outline-light" href="#projects">View Projects</a>
+      </div>
+
+      <!-- EDIT: quick stats — change the numbers/labels to whatever you want to highlight -->
+      <div class="hero-stats">
+        <div><strong>10+</strong><span>Featured Projects</span></div>
+        <div><strong>5+</strong><span>Certifications</span></div>
+        <div><strong>5+</strong><span>Tools &amp; Languages</span></div>
+      </div>
+    </div>
+
+    <!-- Decorative "dashboard" skills panel — floats in front of the photo
+         backdrop above. EDIT: change the skill names / percentages, or
+         delete this whole block if you'd rather let the photo show fully. -->
+    <div class="hero-panel reveal">
+      <div class="hero-panel-bar"><span></span><span></span><span></span></div>
+      <div class="hero-panel-body">
+        <div class="hero-mock-row head"><span>Skill</span><span>Level</span><span></span></div>
+        <div class="hero-mock-row"><span>Excel</span><span>95%</span><div class="hero-mock-bar amber" style="--w:95%"></div></div>
+        <div class="hero-mock-row"><span>Power BI</span><span>92%</span><div class="hero-mock-bar amber" style="--w:92%"></div></div>
+        <div class="hero-mock-row"><span>Python</span><span>78%</span><div class="hero-mock-bar" style="--w:78%"></div></div>
+        <div class="hero-mock-row"><span>SQL</span><span>75%</span><div class="hero-mock-bar" style="--w:75%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Full-screen photo viewer, opened by clicking the round avatar in the navbar -->
+<div class="modal-overlay" id="photoLightbox">
+  <button class="modal-close photo-lightbox-close" id="photoLightboxClose" aria-label="Close">&times;</button>
+  <img src="assets/images/profile.jpg" alt="Tuhin Santra" class="photo-lightbox-img">
+</div>
+
+<!-- ============ SECTION: ABOUT (A2) ============ -->
+<section id="about">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="cell-ref">A2 &middot; About</span>
+      <h2 class="section-heading">About Me</h2>
+      <p class="section-sub">A quick summary of who I am and how I like to work with data.</p>
+    </div>
+
+    <div class="about-grid">
+      <!-- EDIT: this paragraph text -->
+      <div class="about-text reveal">
+        <p>
+          I am an analytically driven MBA graduate with a strong foundation in finance and Data analytics. 
+          I enjoy transforming complex, unstructured data into meaningful insights that support strategic 
+          decision-making and drive business performance.
+        </p>
+        <p>
+          My recent work has ranged from building interactive Power BI dashboards and Excel
+          models to developing a Python/Streamlit tool that helps non-technical users clean
+          their own datasets. I like projects where analysis leads directly to a decision or
+          an action.
+        </p>
+        <p>
+          <!-- EDIT: replace with your real LinkedIn / GitHub links -->
+          Find me on <a href="http://www.linkedin.com/in/tuhin-santra-data-analysist" target="_blank" rel="noopener" style="color:var(--teal); text-decoration:underline;">LinkedIn</a>
+          and <a href="https://github.com/Tuhin8764" target="_blank" rel="noopener" style="color:var(--teal); text-decoration:underline;">GitHub</a>.
+        </p>
+      </div>
+
+      <!-- EDIT: swap these three cards for whatever you want to highlight about yourself -->
+      <div class="about-highlights reveal">
+        <div class="about-highlight-card">
+          <div class="icon">01</div>
+          <div><h4>Data Storytelling</h4><p>Turning dense spreadsheets and dashboards into insights anyone can act on.</p></div>
+        </div>
+        <div class="about-highlight-card">
+          <div class="icon">02</div>
+          <div><h4>Dashboard Building</h4><p>Designing clear, decision-ready dashboards in Power BI, Tableau &amp; Google Data Studio.</p></div>
+        </div>
+        <div class="about-highlight-card">
+          <div class="icon">03</div>
+          <div><h4>Problem Solving</h4><p>Adaptable team player who enjoys breaking down ambiguous business problems.</p></div>
+        </div>
+        <div class="about-highlight-card">
+          <div class="icon">04</div>
+          <div><h4>Financial Modeling</h4><p>Designing robust financial models for budgeting, forecasting, valuation, and scenario analysis to drive informed decisions.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION: SKILLS (A3) ============ -->
+<section id="skills" style="background:var(--panel-alt);">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="cell-ref">A3 &middot; Skills</span>
+      <h2 class="section-heading">Skills &amp; Tools</h2>
+      <p class="section-sub">The languages, tools, and environments I use most.</p>
+    </div>
+
+    <!-- EDIT: add/remove <span class="skill-tag"> items or whole <div class="skill-card"> blocks -->
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <h3>Tech Languages</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">HTML</span>
+          <span class="skill-tag">CSS</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <h3>Data Cleaning</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Excel</span>
+          <span class="skill-tag">Pandas</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <h3>Analysis Environment</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Jupyter Notebook</span>
+          <span class="skill-tag">Google Colab</span>
+          <span class="skill-tag">PyCharm</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <h3>Data Visualization</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Power BI</span>
+          <span class="skill-tag">Tableau</span>
+          <span class="skill-tag">Google Data Studio</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <h3>Tech Skills</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Dashboard Making</span>
+          <span class="skill-tag">Data Modelling</span>
+          <span class="skill-tag">Data Analysis</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <h3>Soft Skills</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Storytelling</span>
+          <span class="skill-tag">Team Player</span>
+          <span class="skill-tag">Adaptability</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <h3>Financial Analyst Skills</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Financial Modeling</span>
+          <span class="skill-tag">Financial Statement Analysis</span>
+          <span class="skill-tag">Budgeting & Forecasting</span>
+          <span class="skill-tag">Ratio Analysis</span>
+          <span class="skill-tag">Business Valuation</span>
+          <span class="skill-tag">Scenario Analysis</span>
+          <span class="skill-tag">DCF</span>
+          <span class="skill-tag">Tally Prime</span>
+          <span class="skill-tag">Google Sheets</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION: EXPERIENCE (A4) ============ -->
+<section id="experience">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="cell-ref">A4 &middot; Experience</span>
+      <h2 class="section-heading">Work Experience</h2>
+      <p class="section-sub">Where I've applied these skills professionally.</p>
+    </div>
+
+    <!-- EDIT: copy a .timeline-item block to add another role.
+         - Give each card an "exp-tag" of either "Internship" or "Job"
+           (just change the text AND the class: exp-tag-internship / exp-tag-job)
+         - The "View Certificate" button is optional — remove the whole
+           <button class="view-cert-btn">...</button> line if a role has no
+           certificate. Otherwise put the certificate file in
+           assets/experience-certificates/ and point data-cert-src at it.
+           Set data-cert-type to "image" or "pdf" to match the file. -->
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-card">
+          <div class="timeline-card-head">
+            <span class="timeline-meta">July 2025 &ndash; October 2025</span>
+            <span class="exp-tag exp-tag-internship">Internship</span>
+          </div>
+          <h3>Market Research Analyst Intern</h3>
+          <h4>Cechoes Technology PVT. LTD.</h4>
+          <p>Supported strategic decision-making by improving visibility into market and competitor trends and tracking key performance indicators.</p>
+          <ul>
+            <li>Analyzed market and competitor data to identify growth opportunities</li>
+            <li>Transformed disconnected data into actionable insights for leadership</li>
+            <li>Tracked KPIs and presented findings to support financial forecasting &amp; ROI evaluation</li>
+          </ul>
+          <span class="timeline-tools">Tools: Excel &middot; MS Word &middot; Presentation Tools</span>
+          <button class="view-cert-btn"
+                  data-cert-src="assets/experience-certificates/market-research-analyst-intern.jpg"
+                  data-cert-type="image"
+                  data-cert-title="Market Research Analyst Intern — Cechoes Technology PVT. LTD.">
+            &#127891; View Certificate &rarr;
+          </button>
+        </div>
+      </div>
+
+      <!--
+      Copy this block to add your next role (Internship or Job):
+      <div class="timeline-item reveal">
+        <div class="timeline-card">
+          <div class="timeline-card-head">
+            <span class="timeline-meta">Month Year – Month Year</span>
+            <span class="exp-tag exp-tag-job">Job</span>
+          </div>
+          <h3>Job Title</h3>
+          <h4>Company Name</h4>
+          <p>One-line summary of the role.</p>
+          <ul>
+            <li>Responsibility or achievement</li>
+          </ul>
+          <span class="timeline-tools">Tools: Tool1 · Tool2</span>
+          <button class="view-cert-btn"
+                  data-cert-src="assets/experience-certificates/your-file.jpg"
+                  data-cert-type="image"
+                  data-cert-title="Job Title — Company Name">
+            &#127891; View Certificate &rarr;
+          </button>
+        </div>
+      </div>
+      -->
+    </div>
+  </div>
+</section>
+
+<!-- Shared pop-up for viewing a Work Experience certificate (image or PDF).
+     Opened by any .view-cert-btn button above — see script.js. -->
+<div class="modal-overlay" id="expCertModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="expCertModalTitle">Certificate</h3>
+      <button class="modal-close" id="expCertModalClose" aria-label="Close">&times;</button>
+    </div>
+    <div class="modal-body" id="expCertModalBody"></div>
+  </div>
+</div>
+
+
+<!-- ============ SECTION: EDUCATION (A5) ============ -->
+<section id="education" style="background:var(--panel-alt);">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="cell-ref">A5 &middot; Education</span>
+      <h2 class="section-heading">Education &amp; Certifications</h2>
+      <p class="section-sub">My academic background and completed certifications.</p>
+    </div>
+
+    <!-- ---- EDUCATION (chronological timeline) ----
+         EDIT: copy a .timeline-item block to add another degree -->
+    <h3 class="subsection-heading reveal">Education</h3>
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-card">
+          <span class="timeline-meta">2026</span>
+          <h3>PGP + MBA &mdash; Business Analytics &amp; Data Science</h3>
+          <h4>Bengal Institute of Business Studies &ndash; Vidyasagar University</h4>
+          <span class="edu-percentage">69%</span>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-card">
+          <span class="timeline-meta">2024</span>
+          <h3>B.Com &mdash; Accounting &amp; Finance</h3>
+          <h4>K.D. College of Commerce &amp; General Studies</h4>
+          <span class="edu-percentage">70%</span>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-card">
+          <span class="timeline-meta">2021</span>
+          <h3>W.B.C.H.S.E &mdash; Commerce (H.S)</h3>
+          <h4>Debra Uchchatara Madhyamik Vidyalaya</h4>
+          <span class="edu-percentage">71%</span>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-card">
+          <span class="timeline-meta">2019</span>
+          <h3>W.B.B.S.E (Secondary Examination)</h3>
+          <h4>Arjuni High School</h4>
+          <span class="edu-percentage">60%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---- CERTIFICATIONS (separate card grid — not a timeline, since
+         these aren't a chronological progression the way degrees are)
+
+         Two card types, pick whichever fits each certificate:
+
+         TYPE 1 — IMAGE (flips on click to show a certificate image)
+         Copy this whole block:
+
+         <div class="cert-card reveal" tabindex="0" role="button" aria-label="Flip to view certificate: TITLE">
+           <div class="cert-card-inner">
+             <div class="cert-card-front">
+               <div class="cert-icon">&#127891;</div>
+               <h3>TITLE</h3>
+               <h4>ISSUER</h4>
+               <p>SHORT DESCRIPTION</p>
+               <span class="cert-flip-hint">Click to view certificate &#8635;</span>
+             </div>
+             <div class="cert-card-back">
+               <img src="assets/certificate/YOUR-FILE.jpg" alt="TITLE certificate"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+               <div class="cert-back-fallback">Add your certificate image at<br>assets/certificate/YOUR-FILE.jpg</div>
+               <span class="cert-back-hint">Click to flip back</span>
+             </div>
+           </div>
+         </div>
+
+         TYPE 2 — LINK (opens a real verification URL in a new tab, no flip)
+         Copy this whole block instead:
+
+         <a class="cert-card cert-card-link reveal" href="https://YOUR-VERIFICATION-LINK" target="_blank" rel="noopener" aria-label="View certificate: TITLE">
+           <div class="cert-icon">&#127891;</div>
+           <h3>TITLE</h3>
+           <h4>ISSUER</h4>
+           <p>SHORT DESCRIPTION</p>
+           <span class="cert-link-hint">View Certificate &#8599;</span>
+         </a>
+
+         Mix and match freely — some cards can be TYPE 1, others TYPE 2. ---- -->
+    <h3 class="subsection-heading reveal">Certifications</h3>
+    <div class="cert-grid">
+
+      <!--Business Analytics and Data Science from IBM -->
+      <a class="cert-card cert-card-link reveal" href="https://bibs.skillsnetwork.site/certificates/5ad1ecda-4b5d-4296-94ae-5d8a81d511e1" target="_blank" rel="noopener" aria-label="View certificate: Example Link-Based Certificate">
+        <div class="cert-icon">&#127891;</div>
+        <h3>Business Analytics and Data Science &mdash; 2026 </h3>
+        <h4>IBM</h4>
+        <p>Learned business analytics, data visualization, and data-driven decision-making using industry-standard tools.</p>
+        <span class="cert-link-hint">View Certificate &#8599;</span>
+      </a>
+
+      <!-- PDF-based certificate card: uses <embed> instead of <img> on the
+     back, since a PDF can't be shown with an <img> tag. -->
+<!---Webel Data Science,AI and Cyber Security Certificate--->
+<div class="cert-card reveal" tabindex="0" role="button" aria-label="Flip to view certificate: Financial Accounting with Tally Prime & GST">
+  <div class="cert-card-inner">
+    <div class="cert-card-front">
+      <div class="cert-icon">&#127891;</div>
+      <h3>Data Science, Responsible AI, and Cyber Security &mdash; 2026</h3>
+      <h4>WEBEL</h4>
+      <p>Learned data science fundamentals, ethical AI practices, and cyber security concepts through six months of industry-focused training.</p>
+      <span class="cert-flip-hint">Click to view certificate &#8635;</span>
+    </div>
+    <div class="cert-card-back">
+      <embed src="assets/certificate/Webel_Traning_Certificate.pdf" type="application/pdf">
+      <div class="cert-back-fallback">Add your certificate PDF at<br>assets/certificate/tally_certificate.pdf</div>
+      <span class="cert-back-hint">Click to flip back</span>
+    </div>
+  </div>
+</div>
+
+      <!---Machine Learning with Python Certificate--->
+      <a class="cert-card cert-card-link reveal" href="https://verify.eicta.digitalcredentials.in/45499d59-c62f-4df9-ba6e-ebb00a8e679a?utm_source=direct_link&utm_medium=portal" target="_blank" rel="noopener" aria-label="View certificate: TITLE">
+           <div class="cert-icon">&#127891;</div>
+           <h3>Machine Learning with Python &mdash; 2025</h3>
+           <h4>IIT Kanpur</h4>
+           <p>Gained foundational machine learning concepts using Python.</p>
+           <span class="cert-link-hint">View Certificate &#8599;</span>
+         </a>
+
+         <!--Advanced Excel with Power BI -->
+      <a class="cert-card cert-card-link reveal" href="https://verify.eicta.digitalcredentials.in/f5eb65f6-5f04-4183-9325-dead89823f8c?utm_source=direct_link&utm_medium=portal" target="_blank" rel="noopener" aria-label="View certificate: TITLE">
+           <div class="cert-icon">&#127891;</div>
+           <h3>Advanced Excel with Power BI &mdash; 2025</h3>
+           <h4>IIT Kanpur</h4>
+           <p>Gained skills in data analysis and visualization for effective decision-making.</p>
+           <span class="cert-link-hint">View Certificate &#8599;</span>
+         </a>
+
+         <!---Excel Crash Course Certificate--->
+      <div class="cert-card reveal" tabindex="0" role="button" aria-label="Flip to view certificate: Excel Crash Course">
+        <div class="cert-card-inner">
+          <div class="cert-card-front">
+            <div class="cert-icon">&#127891;</div>
+            <h3>Excel Crash Course &mdash; 2024</h3>
+            <h4>Skill Course</h4>
+            <p>Learned complex data analysis using PivotTables and VLOOKUP.</p>
+            <span class="cert-flip-hint">Click to view certificate &#8635;</span>
+          </div>
+          <div class="cert-card-back">
+            <img src="assets/certificate/excel-crash-course.jpg" alt="Excel Crash Course certificate"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="cert-back-fallback">Add your certificate image at<br>assets/certificate/excel-crash-course.jpg</div>
+            <span class="cert-back-hint">Click to flip back</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PDF-based certificate card: uses <embed> instead of <img> on the
+     back, since a PDF can't be shown with an <img> tag. -->
+<!-- Financial Accounting with Tally Prime & GST -->
+<div class="cert-card reveal" tabindex="0" role="button" aria-label="Flip to view certificate: Financial Accounting with Tally Prime & GST">
+  <div class="cert-card-inner">
+    <div class="cert-card-front">
+      <div class="cert-icon">&#127891;</div>
+      <h3>Financial Accounting with Tally Prime &amp; GST &mdash; 2024</h3>
+      <h4>TATA Strive / ICA</h4>
+      <p>Learned financial accounting fundamentals using Tally Prime, including GST compliance.</p>
+      <span class="cert-flip-hint">Click to view certificate &#8635;</span>
+    </div>
+    <div class="cert-card-back">
+      <embed src="assets/certificate/tally_certificate.pdf" type="application/pdf">
+      <div class="cert-back-fallback">Add your certificate PDF at<br>assets/certificate/tally_certificate.pdf</div>
+      <span class="cert-back-hint">Click to flip back</span>
+    </div>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION: PROJECTS (A6) ============ -->
+<!--
+  IMPORTANT: The content of this section is generated automatically by
+  script.js from the data in projects-data.js. To add, remove, or edit a
+  project, open projects-data.js — do NOT edit project cards by hand here,
+  they will be overwritten every time the page loads.
+-->
+<section id="projects">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="cell-ref">A6 &middot; Projects</span>
+      <h2 class="section-heading">Projects</h2>
+      <p class="section-sub">
+        Browse by category — just like flipping between sheet tabs in a workbook.
+        Click any project to view its embed, PDF, or image in full.
+      </p>
+    </div>
+
+    <!-- Category tabs are generated automatically from projects-data.js -->
+    <div class="sheet-tabs" id="sheetTabs"></div>
+
+    <!-- Project cards are generated automatically from projects-data.js -->
+    <div class="projects-grid" id="projectsGrid"></div>
+  </div>
+</section>
+
+<!-- Modal / popup used to view a project's embed, PDF, or image in full size -->
+<div class="modal-overlay" id="projectModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="modalTitle">Project title</h3>
+      <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <p class="modal-desc" id="modalDesc"></p>
+  </div>
+</div>
+
+<!-- ============ SECTION: CONTACT (A7) ============ -->
+<section id="contact" style="background:var(--panel-alt);">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="cell-ref">A7 &middot; Contact</span>
+      <h2 class="section-heading">Get In Touch</h2>
+      <p class="section-sub">Have a project, internship, or role in mind? Fill out the form or reach me directly.</p>
+    </div>
+
+    <div class="contact-grid">
+      <!-- EDIT: replace these placeholders with your real contact details -->
+      <div class="contact-info-card reveal">
+        <div class="contact-info-item">
+          <div class="icon">&#9993;</div>
+          <div><h4>Email</h4><a href="santratuhin479@gmail.com">youremail@example.com</a></div>
+        </div>
+        <div class="contact-info-item">
+          <div class="icon">&#9742;</div>
+          <div><h4>Phone</h4><p>+91 XXXXX XXXXX</p></div>
+        </div>
+        <div class="contact-info-item">
+          <div class="icon">&#128205;</div>
+          <div><h4>Location</h4><p>West Bengal, India</p></div>
+        </div>
+        <div class="contact-info-item">
+          <div class="icon">&#128279;</div>
+          <div>
+            <h4>Links</h4>
+            <p>
+              <a href="http://www.linkedin.com/in/tuhin-santra-data-analysist" target="_blank" rel="noopener" style="color:var(--teal); text-decoration:underline;">LinkedIn</a>
+              &nbsp;&middot;&nbsp;
+              <a href="https://github.com/Tuhin8764" target="_blank" rel="noopener" style="color:var(--teal); text-decoration:underline;">GitHub</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!--
+        CONTACT FORM — instead of embedding the Google Form inline (which
+        always looks like a plain white Google page dropped into the site),
+        this shows a button that opens your form in a popup that matches
+        the rest of the site. The actual form embed code lives in the
+        hidden template below — to swap in a different Google Form, just
+        replace the <iframe> src there.
+      -->
+      <div class="contact-form-card reveal">
+        <div class="contact-form-card-icon">&#128172;</div>
+        <h3>Prefer a quick form?</h3>
+        <p>Open my contact form in a pop-up and send your details directly — no need to leave this page.</p>
+        <button class="btn btn-primary" id="openContactForm">Open Contact Form &rarr;</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Hidden template holding the Google Form embed code. script.js copies the
+     iframe out of here into the popup when the button above is clicked.
+     To use a different form, replace ONLY the <iframe ...> line below. -->
+<template id="contactFormTemplate">
+  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSefo-w1_6JL-mb5eVN-v4o6I-7oYYouDZhkLWkyouPkQeDSJQ/viewform?embedded=true" width="640" height="881" frameborder="0" marginheight="0" marginwidth="0">Loading&hellip;</iframe>
+</template>
+
+<!-- Popup used to show the contact form on top of the page -->
+<div class="modal-overlay" id="contactModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3>Contact Form</h3>
+      <button class="modal-close" id="contactModalClose" aria-label="Close">&times;</button>
+    </div>
+    <div class="modal-body" id="contactModalBody"></div>
+  </div>
+</div>
+
+</main>
+
+<!-- ================================ FOOTER ================================= -->
+<footer>
+  <div class="container">
+    <p>&copy; <span id="year"></span> Tuhin Santra. Built with HTML, CSS &amp; JavaScript.</p>
+  </div>
+</footer>
+
+<!-- Load the project data FIRST, then the behavior script that reads it -->
+<script src="projects-data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

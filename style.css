@@ -1,0 +1,915 @@
+/* ============================================================================
+   STYLE.CSS
+   ----------------------------------------------------------------------------
+   This file controls the LOOK of your portfolio (colors, fonts, spacing,
+   layout). You generally do NOT need to touch this file to add/remove
+   projects or edit your text — that happens in index.html (for text) and
+   projects-data.js (for projects).
+
+   Design idea: a dark, "developer / technical" theme — like a code editor
+   or terminal — mixed with your data-analyst identity (Excel sheet tabs for
+   project categories, "cell reference" labels like A1/A2 next to each
+   section, and terminal-style traffic-light dots on the hero panel).
+   ============================================================================ */
+
+/* ---------- 1. DESIGN TOKENS (edit colors/fonts here in one place) -------- */
+:root {
+  /* Core palette — dark "code editor" base */
+  --bg: #0b0f17;               /* page background — near-black navy */
+  --bg-dot: rgba(255,255,255,0.06); /* dot-grid pattern dots */
+  --panel: #121826;            /* card / panel background */
+  --panel-alt: #0e1420;        /* alternating section background, slightly darker */
+  --panel-border: #232c40;     /* card borders */
+  --panel-border-soft: #1a2233;
+
+  --ink: #e7edf6;              /* primary text — near-white */
+  --ink-soft: #9aa8c2;         /* secondary / muted text */
+  --ink-faint: #67728a;        /* tertiary text, placeholders */
+
+  --accent: #f2994a;           /* primary accent — amber (kept from data/BI identity) */
+  --accent-ink: #1a1206;       /* dark text-on-accent (for light amber buttons) */
+  --accent-soft: rgba(242, 153, 74, 0.14); /* translucent amber wash on dark bg */
+
+  --teal: #2dd4c4;             /* secondary accent — bright chart teal */
+  --teal-soft: rgba(45, 212, 196, 0.13);
+
+  --navy-deep: #070a10;        /* hero / footer — darkest background */
+  --navy-line: #182033;        /* grid lines on the darkest background */
+
+  --radius: 10px;
+  --radius-sm: 6px;
+  --shadow: 0 20px 45px -20px rgba(0, 0, 0, 0.65);
+
+  /* Typography: display (headings), body (paragraphs), mono (data/labels) */
+  --font-display: "Space Grotesk", "Segoe UI", sans-serif;
+  --font-body: "Inter", "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
+
+  --container: 1140px;
+}
+
+/* ---------- 2. RESET / BASE ------------------------------------------------ */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  /* Dot-grid "circuit board" pattern instead of flat color — reads as
+     technical/developer rather than plain. Change --bg / --bg-dot above
+     to adjust it everywhere at once. */
+  background-image: radial-gradient(var(--bg-dot) 1.4px, transparent 1.4px);
+  background-size: 26px 26px;
+  background-color: var(--bg);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; text-decoration: none; }
+
+ul { list-style: none; }
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.15; color: var(--ink); }
+
+/* "Cell reference" eyebrow label, e.g. A1, A2, A3 — echoes spreadsheet rows.
+   Shown before every section heading. Edit the numbers/letters directly
+   in index.html next to each heading if you reorder sections. */
+.cell-ref {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--teal);
+  background: var(--teal-soft);
+  border: 1px solid rgba(45, 212, 196, 0.3);
+  padding: 3px 10px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 14px;
+}
+
+.section-heading { font-size: clamp(28px, 4vw, 40px); font-weight: 600; }
+
+.section-sub {
+  color: var(--ink-soft);
+  max-width: 640px;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+section { padding: 96px 0; position: relative; }
+
+.section-head { margin-bottom: 48px; }
+
+/* Reveal-on-scroll utility (JS toggles .is-visible) */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+/* ---------- 3. BUTTONS ------------------------------------------------------ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 12px 22px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+
+.btn-primary { background: var(--accent); color: #1a1206; box-shadow: 0 8px 24px -8px rgba(242, 153, 74, 0.5); font-weight: 600; }
+.btn-primary:hover { background: #ffab5e; }
+
+.btn-outline { background: transparent; color: var(--ink); border-color: var(--panel-border); }
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+.btn-outline-light { background: transparent; color: var(--ink); border-color: rgba(231,237,246,0.25); }
+.btn-outline-light:hover { border-color: var(--teal); color: var(--teal); }
+
+/* ---------- 4. NAVBAR ------------------------------------------------------- */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 500;
+  background: rgba(11, 15, 23, 0.82);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--panel-border-soft);
+}
+
+.navbar .container { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+
+.brand-group { display: flex; align-items: center; gap: 10px; }
+
+/* Circular clickable profile photo in the navbar */
+.brand-avatar-btn {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--accent);
+  padding: 0;
+  background: var(--accent-soft);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+.brand-avatar-btn:hover { transform: scale(1.06); border-color: var(--teal); }
+.brand-avatar-fallback {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+  color: var(--accent);
+}
+.brand-avatar {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top; /* biases the crop toward the face */
+}
+
+.brand { font-family: var(--font-mono); font-weight: 600; font-size: 17px; letter-spacing: 0.02em; color: var(--ink); }
+.brand span { color: var(--accent); }
+
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink-soft);
+  position: relative;
+  padding: 4px 2px;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--ink); }
+.nav-links a.active::after {
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: -6px;
+  height: 2px; background: var(--accent);
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+.nav-toggle span { width: 22px; height: 2px; background: var(--ink); display: block; }
+
+/* ---------- 5. HERO / HOME --------------------------------------------------- */
+#home {
+  position: relative;
+  padding-top: 170px;
+  padding-bottom: 110px;
+  background:
+    linear-gradient(var(--navy-line) 1px, transparent 1px) 0 0 / 44px 44px,
+    linear-gradient(90deg, var(--navy-line) 1px, transparent 1px) 0 0 / 44px 44px,
+    var(--navy-deep);
+  color: #fff;
+  overflow: hidden;
+  border-bottom: 1px solid var(--panel-border-soft);
+}
+
+/* Full-bleed profile photo layer — sits behind the text, blended into the
+   dark background with gradients (set inline in index.html alongside the
+   image path) rather than shown as a hard-edged photo box. */
+.hero-photo-layer {
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: 60%;
+  min-width: 420px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: saturate(1.05) contrast(1.04) brightness(0.96);
+  z-index: 0;
+}
+
+.hero-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.3fr 0.9fr;
+  gap: 50px;
+  align-items: center;
+}
+
+.eyebrow-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--teal);
+  background: var(--teal-soft);
+  border: 1px solid rgba(45, 212, 196, 0.3);
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 22px;
+}
+
+.hero-title {
+  font-size: clamp(36px, 5.4vw, 58px);
+  font-weight: 700;
+  color: #fff;
+}
+.hero-title .accent-word { color: var(--accent); }
+
+/* Terminal-style prompt before the role line, e.g. "$ Business Analytics..." */
+.hero-role {
+  font-family: var(--font-mono);
+  font-size: 17px;
+  color: #b9c4d8;
+  margin-top: 14px;
+}
+.hero-role::before {
+  content: "$ ";
+  color: var(--accent);
+}
+.hero-role .cursor {
+  display: inline-block;
+  width: 8px; height: 16px;
+  background: var(--teal);
+  margin-left: 4px;
+  vertical-align: middle;
+  animation: blink 1s steps(1) infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+.hero-desc { color: #b9c4d8; max-width: 560px; margin-top: 20px; font-size: 16px; }
+
+.hero-actions { display: flex; gap: 14px; margin-top: 36px; flex-wrap: wrap; }
+
+.hero-stats { display: flex; gap: 32px; margin-top: 48px; flex-wrap: wrap; }
+.hero-stats div { font-family: var(--font-mono); }
+.hero-stats strong { display: block; font-size: 26px; color: #fff; }
+.hero-stats span { font-size: 12.5px; color: var(--ink-faint); }
+
+/* Decorative "dashboard" skills panel that floats in front of the photo
+   backdrop, styled like a code editor / terminal window with classic
+   red-yellow-green traffic-light window controls. */
+.hero-panel {
+  position: relative;
+  background: var(--panel);
+  border-radius: var(--radius);
+  border: 1px solid var(--panel-border);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.hero-panel-bar {
+  display: flex; gap: 6px;
+  padding: 12px 14px;
+  background: #0d1420;
+  border-bottom: 1px solid var(--panel-border);
+}
+.hero-panel-bar span { width: 10px; height: 10px; border-radius: 50%; }
+.hero-panel-bar span:nth-child(1) { background: #ff5f56; }
+.hero-panel-bar span:nth-child(2) { background: #ffbd2e; }
+.hero-panel-bar span:nth-child(3) { background: #27c93f; }
+.hero-panel-body { padding: 18px; }
+.hero-mock-row {
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr 0.8fr;
+  gap: 8px;
+  padding: 9px 0;
+  border-bottom: 1px dashed var(--panel-border);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--ink-soft);
+}
+.hero-mock-row.head { color: var(--ink); font-weight: 600; border-bottom: 1px solid var(--panel-border); }
+.hero-mock-bar { height: 7px; border-radius: 4px; background: rgba(45,212,196,0.15); position: relative; overflow: hidden; }
+.hero-mock-bar::after { content: ""; position: absolute; inset: 0; width: var(--w, 60%); background: var(--teal); border-radius: 4px; }
+.hero-mock-bar.amber::after { background: var(--accent); }
+
+/* ---------- 6. ABOUT --------------------------------------------------------- */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+.about-text p { color: var(--ink-soft); margin-bottom: 16px; font-size: 16px; }
+.about-highlights { display: grid; gap: 14px; }
+.about-highlight-card {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.about-highlight-card .icon {
+  width: 38px; height: 38px; border-radius: 8px;
+  background: var(--accent-soft); color: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-weight: 700; flex-shrink: 0;
+}
+.about-highlight-card h4 { font-size: 15.5px; margin-bottom: 3px; }
+.about-highlight-card p { font-size: 13.5px; color: var(--ink-soft); margin: 0; }
+
+/* ---------- 7. SKILLS --------------------------------------------------------- */
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.skill-card {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+.skill-card h3 { font-size: 16px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.skill-card h3::before {
+  content: "";
+  width: 8px; height: 8px; border-radius: 2px; background: var(--accent);
+}
+.skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.skill-tag {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--teal-soft);
+  color: var(--teal);
+  border: 1px solid rgba(45,212,196,0.25);
+}
+
+/* ---------- 8. EXPERIENCE / EDUCATION (timeline) ----------------------------- */
+.timeline { position: relative; padding-left: 30px; }
+.timeline::before {
+  content: "";
+  position: absolute; left: 6px; top: 6px; bottom: 6px;
+  width: 2px; background: var(--panel-border);
+}
+.timeline-item { position: relative; padding-bottom: 34px; }
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-item::before {
+  content: "";
+  position: absolute; left: -30px; top: 4px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--panel); border: 2px solid var(--accent);
+}
+.timeline-card {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+}
+.timeline-meta {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--teal);
+  margin-bottom: 6px;
+  display: block;
+}
+.timeline-card h3 { font-size: 18px; margin-bottom: 3px; }
+.timeline-card h4 { font-size: 14px; font-weight: 500; color: var(--ink-soft); margin-bottom: 12px; }
+.timeline-card ul { margin-top: 10px; display: grid; gap: 6px; }
+.timeline-card ul li {
+  font-size: 14.5px; color: var(--ink-soft); padding-left: 16px; position: relative;
+}
+.timeline-card ul li::before { content: "\2022"; color: var(--accent); position: absolute; left: 0; }
+.timeline-tools { margin-top: 12px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-faint); }
+
+/* Row holding the date + Internship/Job tag at the top of an experience card */
+.timeline-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+.timeline-card-head .timeline-meta { margin-bottom: 0; }
+
+/* "Internship" / "Job" tag on each Work Experience card */
+.exp-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.exp-tag-internship {
+  color: var(--teal);
+  background: var(--teal-soft);
+  border: 1px solid rgba(45, 212, 196, 0.3);
+}
+.exp-tag-job {
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid rgba(242, 153, 74, 0.35);
+}
+
+/* "View Certificate" button on a Work Experience card — opens #expCertModal */
+.view-cert-btn {
+  margin-top: 14px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid rgba(242, 153, 74, 0.3);
+  padding: 9px 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.view-cert-btn:hover { background: rgba(242, 153, 74, 0.24); }
+
+.edu-percentage {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: var(--radius-sm);
+  padding: 2px 8px;
+  display: inline-block;
+  margin-top: 8px;
+}
+
+/* Sub-heading used to separate Education from Certifications within the
+   same section (e.g. "Education" and "Certifications"). */
+.subsection-heading {
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0 0 22px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed var(--panel-border);
+}
+.subsection-heading:not(:first-child) { margin-top: 56px; }
+
+/* Certifications shown as a card grid (not a timeline) so they read as a
+   clearly separate, non-chronological group from your Education history.
+
+   Each card FLIPS on click to reveal a certificate image on the back —
+   see .cert-card-inner / .cert-card-front / .cert-card-back. The image
+   lives in assets/certificate/ (see index.html for the exact path per
+   card). Front and back are always exactly the same width/height, since
+   the back is absolutely positioned inside the same fixed-height card. */
+.cert-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+.cert-card {
+  height: 240px;
+  perspective: 1400px; /* how "deep" the 3D flip looks */
+  cursor: pointer;
+  outline: none;
+}
+.cert-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.cert-card.is-flipped .cert-card-inner { transform: rotateY(180deg); }
+
+.cert-card-front,
+.cert-card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--panel-border);
+  overflow: hidden;
+  background: var(--panel);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.cert-card:hover .cert-card-front,
+.cert-card:hover .cert-card-back,
+.cert-card:focus-visible .cert-card-front {
+  border-color: rgba(242, 153, 74, 0.4);
+  box-shadow: var(--shadow);
+}
+
+.cert-card-front {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.cert-card .cert-icon {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: var(--accent-soft); color: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; margin-bottom: 6px;
+}
+.cert-card h3 { font-size: 15.5px; }
+.cert-card h4 { font-size: 13px; font-weight: 500; color: var(--ink-soft); }
+.cert-card p { font-size: 13.5px; color: var(--ink-soft); margin-top: 4px; }
+
+/* "Click to flip" hint, bottom-right of the front face */
+.cert-flip-hint {
+  margin-top: auto;
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--teal);
+  background: var(--teal-soft);
+  border: 1px solid rgba(45, 212, 196, 0.3);
+  padding: 4px 9px;
+  border-radius: var(--radius-sm);
+}
+
+/* LINK variant — for certificates that have a real verification URL instead
+   of an image. No flip animation; the whole card is a plain <a> that opens
+   the link in a new tab. Same fixed height as the flip cards so the grid
+   still lines up. Use class="cert-card cert-card-link" (see index.html). */
+.cert-card.cert-card-link {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 22px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.cert-card.cert-card-link:hover,
+.cert-card.cert-card-link:focus-visible {
+  transform: translateY(-4px);
+  border-color: rgba(242, 153, 74, 0.4);
+  box-shadow: var(--shadow);
+}
+/* Reuses .cert-flip-hint's badge look but colored like the amber "view"
+   links elsewhere on the site, so it visually reads as "leaves the page". */
+.cert-link-hint {
+  margin-top: auto;
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid rgba(242, 153, 74, 0.35);
+  padding: 4px 9px;
+  border-radius: var(--radius-sm);
+}
+
+/* Back face: the certificate image, filling the card exactly */
+.cert-card-back {
+  transform: rotateY(180deg);
+  background: #0e1420;
+}
+.cert-card-back img,
+.cert-card-back embed,
+.cert-card-back iframe {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border: none;
+}
+.cert-back-fallback {
+  display: none; /* JS shows this if the certificate image fails to load */
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  padding: 18px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+.cert-back-hint {
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: #fff;
+  background: rgba(7, 10, 16, 0.65);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+}
+
+/* ---------- 9. PROJECTS (Excel-tab category switcher) ------------------------ */
+
+/* The category filter is styled like Excel sheet tabs sitting on the
+   bottom edge of a workbook. Categories are generated automatically from
+   projects-data.js — add/remove a category there and these update. */
+.sheet-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  border-bottom: 3px solid var(--panel-border);
+  margin-bottom: 40px;
+}
+.sheet-tab {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  padding: 10px 18px;
+  background: #0e1420;
+  color: var(--ink-soft);
+  border: 1px solid var(--panel-border);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  cursor: pointer;
+  transform: translateY(3px);
+  transition: all 0.15s ease;
+}
+.sheet-tab:hover { color: var(--ink); background: #161f30; }
+.sheet-tab.active {
+  background: var(--panel);
+  color: var(--accent);
+  border-color: var(--panel-border);
+  border-bottom: 3px solid var(--panel);
+  transform: translateY(3px);
+  font-weight: 600;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.project-card {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.project-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: rgba(242,153,74,0.4); }
+
+.project-thumb {
+  aspect-ratio: 16/10;
+  background: linear-gradient(135deg, var(--teal-soft), var(--accent-soft));
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink-faint);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  overflow: hidden;
+  position: relative;
+}
+.project-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.project-thumb-fallback {
+  display: none; /* JS shows this (display:flex) only if the preview image fails to load */
+  align-items: center; justify-content: center;
+  width: 100%; height: 100%;
+  text-align: center;
+  padding: 12px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--ink-faint);
+}
+.project-type-badge {
+  position: absolute; top: 10px; right: 10px;
+  font-family: var(--font-mono); font-size: 10.5px;
+  background: rgba(7,10,16,0.75); color: #fff;
+  padding: 3px 8px; border-radius: 5px; text-transform: uppercase; letter-spacing: 0.04em;
+}
+
+.project-body { padding: 20px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.project-meta-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.project-category-label {
+  font-family: var(--font-mono); font-size: 11.5px; color: var(--teal); text-transform: uppercase; letter-spacing: 0.04em;
+}
+.project-date {
+  font-family: var(--font-mono); font-size: 11px; color: var(--ink-faint); white-space: nowrap;
+}
+.project-body h3 { font-size: 17px; }
+.project-body p { font-size: 14px; color: var(--ink-soft); flex: 1; }
+.project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.project-tag { font-family: var(--font-mono); font-size: 11px; background: #0e1420; color: var(--ink-soft); padding: 3px 8px; border-radius: 5px; border: 1px solid var(--panel-border); }
+
+.project-view-btn {
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid rgba(242,153,74,0.3);
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.15s ease;
+}
+.project-view-btn:hover { background: rgba(242,153,74,0.24); }
+
+.projects-empty {
+  grid-column: 1/-1;
+  text-align: center;
+  color: var(--ink-faint);
+  font-family: var(--font-mono);
+  padding: 40px 0;
+  border: 1px dashed var(--panel-border);
+  border-radius: var(--radius);
+}
+
+/* ---------- 10. PROJECT MODAL (shows embed / pdf / image) -------------------- */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 900;
+  background: rgba(4, 6, 10, 0.82);
+  display: none;
+  align-items: center; justify-content: center;
+  padding: 24px;
+}
+.modal-overlay.open { display: flex; }
+
+/* Full-screen photo viewer, opened from the round avatar in the navbar.
+   Reuses .modal-overlay for the dark backdrop, but shows the image directly
+   (no card/box) since a photo just needs to fill the screen. */
+.photo-lightbox-img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.photo-lightbox-close {
+  position: fixed;
+  top: 22px;
+  right: 22px;
+  z-index: 901;
+}
+.modal-box {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  width: min(920px, 100%);
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.modal-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 22px;
+  border-bottom: 1px solid var(--panel-border);
+}
+.modal-head h3 { font-size: 17px; }
+.modal-close {
+  background: #0e1420; border: 1px solid var(--panel-border); border-radius: 50%;
+  width: 32px; height: 32px; cursor: pointer; font-size: 16px; color: var(--ink-soft);
+}
+.modal-close:hover { background: #161f30; color: var(--ink); }
+.modal-body { padding: 0; overflow: auto; flex: 1; background: #0e1420; }
+.modal-body iframe, .modal-body embed { width: 100%; height: 78vh; border: none; display: block; }
+.modal-body img { width: 100%; height: auto; }
+.modal-desc { padding: 16px 22px; font-size: 14px; color: var(--ink-soft); border-top: 1px solid var(--panel-border); }
+
+/* ---------- 11. CONTACT ------------------------------------------------------- */
+.contact-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 40px; align-items: start; }
+.contact-info-card {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: 26px;
+  display: grid;
+  gap: 20px;
+}
+.contact-info-item { display: flex; gap: 14px; align-items: flex-start; }
+.contact-info-item .icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: var(--teal-soft); color: var(--teal);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: 16px;
+}
+.contact-info-item h4 { font-size: 13.5px; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 3px; font-family: var(--font-mono); font-weight: 500; }
+.contact-info-item p, .contact-info-item a { font-size: 15px; }
+.contact-info-item a:hover { color: var(--accent); }
+
+/* Card that replaces the old inline Google Form embed — just a button
+   that opens the same form in a popup (see .modal-overlay below), so the
+   page never has to show Google's own white form styling inline. */
+.contact-form-card {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: 40px 32px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.contact-form-card-icon {
+  width: 52px; height: 52px; border-radius: 12px;
+  background: var(--accent-soft); color: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; margin-bottom: 6px;
+}
+.contact-form-card h3 { font-size: 19px; }
+.contact-form-card p { font-size: 14.5px; color: var(--ink-soft); max-width: 340px; margin-bottom: 8px; }
+
+/* ---------- 12. FOOTER --------------------------------------------------------- */
+footer {
+  background: var(--navy-deep);
+  color: var(--ink-faint);
+  padding: 36px 0;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  border-top: 1px solid var(--panel-border-soft);
+}
+footer a:hover { color: var(--accent); }
+
+/* ---------- 13. RESPONSIVE ------------------------------------------------------ */
+@media (max-width: 900px) {
+  #home { padding-top: 130px; }
+  .hero-grid { grid-template-columns: 1fr; }
+  /* At this width the layout stacks to one column, so the photo backdrop
+     is faded down further (rather than kept at full width/strength) to
+     avoid it visually competing with the stacked text + panel. */
+  .hero-photo-layer { width: 100%; min-width: 0; opacity: 0.32; }
+  .about-grid { grid-template-columns: 1fr; }
+  .skills-grid { grid-template-columns: repeat(2, 1fr); }
+  .projects-grid { grid-template-columns: repeat(2, 1fr); }
+  .cert-grid { grid-template-columns: repeat(2, 1fr); }
+  .contact-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  /* On mobile the desktop hero padding (170px) left a huge empty gap
+     above the content — this tightens it up so content starts right
+     under the fixed navbar, matching a typical mobile hero layout. */
+  #home { padding-top: 96px; padding-bottom: 56px; }
+  .hero-grid { gap: 34px; }
+  .eyebrow-tag { margin-bottom: 14px; }
+
+  .nav-links {
+    position: absolute; top: 72px; left: 0; right: 0;
+    background: var(--bg);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 18px 24px 26px;
+    border-bottom: 1px solid var(--panel-border);
+    display: none;
+    gap: 16px;
+  }
+  .nav-links.open { display: flex; }
+  .nav-toggle { display: flex; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .cert-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: 22px; }
+  section { padding: 64px 0; }
+
+  /* #home has its own fixed padding (set above, for desktop's fixed navbar
+     offset) that would otherwise override the generic "section" padding
+     above and leave a large empty gap under the navbar on phones. */
+  #home { padding-top: 108px; padding-bottom: 56px; }
+}
