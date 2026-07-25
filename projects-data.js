@@ -51,6 +51,7 @@ const projectsData = [
     tags: ["Power BI", "Excel", "Data Visualization"],
     previewImage: "assets/project_preview/MBBS-powerbi-dashboard.jpg", // card thumbnail — replace with your own screenshot
     date: "April 2024",
+    youtubeUrl: "", // EDIT: paste a YouTube video URL here to show a play-button icon on the project card; leave empty ("") to hide the icon
     type: "pdf", // this project opens as an uploaded PDF when clicked
     embedCode: "",
     fileUrl: "assets/projects/MBBS_College_Dashboard.pdf", // replace with your own file
@@ -66,6 +67,7 @@ const projectsData = [
     tags: ["Excel", "XLOOKUP", "Macros", "Choose"],
     previewImage: "assets/project_preview/Fitness_Dashboard.jpg", // card thumbnail — replace with your own screenshot
     date: "March 2026",
+    youtubeUrl: "", // EDIT: paste a YouTube video URL here to show a play-button icon on the project card; leave empty ("") to hide the icon
     type: "pdf", // this project opens as an uploaded PDF when clicked
     embedCode: "",
     fileUrl: "assets/projects/Body Fitness Tracker.pdf", // replace with your own file
@@ -80,6 +82,7 @@ const projectsData = [
     tags: ["Excel", "XLOOKUP()", "FILTER()", "Chart and graph", "Slicers"],
     previewImage: "assets/project_preview/Salary_Excel_Dashboard.jpg", // card thumbnail — replace with your own screenshot
     date: "March 2026",
+    youtubeUrl: "", // EDIT: paste a YouTube video URL here to show a play-button icon on the project card; leave empty ("") to hide the icon
     type: "pdf", // this project opens as an uploaded PDF when clicked
     embedCode: "",
     fileUrl: "assets/projects/Salary_Excel_Dashboard.pdf", // replace with your own file
@@ -95,6 +98,7 @@ const projectsData = [
     tags: ["SQL", "Joins", "Aggregation"],
     previewImage: "assets/project_preview/sql-report.jpg", // card thumbnail — replace with your own screenshot
     date: "February 2024",
+    youtubeUrl: "", // EDIT: paste a YouTube video URL here to show a play-button icon on the project card; leave empty ("") to hide the icon
     type: "image",
     embedCode: "",
     fileUrl: "assets/projects/sample-image-placeholder.jpg", // replace with your own screenshot
@@ -111,6 +115,7 @@ const projectsData = [
     tags: ["Python", "scikit-learn", "Jupyter"],
     previewImage: "assets/project_preview/ml-practice.jpg", // card thumbnail — replace with your own screenshot
     date: "March 2024",
+    youtubeUrl: "", // EDIT: paste a YouTube video URL here to show a play-button icon on the project card; leave empty ("") to hide the icon
     type: "image",
     embedCode: "",
     fileUrl: "assets/projects/sample-image-placeholder.jpg", // replace with your own screenshot
@@ -126,6 +131,7 @@ const projectsData = [
     tags: ["Python", "Streamlit", "Pandas", "Data Cleaning", "Plotly", "EDA"],
     previewImage: "assets/project_preview/Data_Cleaning_and_Modeling_Studios.jpg", // card thumbnail — replace with your own screenshot
     date: "April 2024",
+    youtubeUrl: "", // EDIT: paste a YouTube video URL here to show a play-button icon on the project card; leave empty ("") to hide the icon
     type: "embed",
     embedCode:`<iframe width="600" height="450" src="https://datacleaningandmodelingstudios.streamlit.app/?embedded=true" frameborder="0" style="border:0" allowfullscreen></iframe>`,
     fileUrl: "",
@@ -141,6 +147,7 @@ const projectsData = [
     tags: ["Python", "Streamlit", "Pandas","Numpy", "Openpyxl","xlsxwriter"],
     previewImage: "assets/project_preview/finscorepipeline.jpg", // card thumbnail — replace with your own screenshot
     date: "March 2024",
+    youtubeUrl: "", // EDIT: paste a YouTube video URL here to show a play-button icon on the project card; leave empty ("") to hide the icon
     type: "embed",
     // NOTE: Streamlit Cloud apps only embed reliably with a single
     // "?embedded=true" query parameter. Adding other params alongside it
@@ -161,6 +168,7 @@ const projectsData = [
     tags: ["Excel", "KPI Tracking", "Reporting"],
     previewImage: "assets/project_preview/kpi-tracker.jpg", // card thumbnail — replace with your own screenshot
     date: "April 2024",
+    youtubeUrl: "", // EDIT: paste a YouTube video URL here to show a play-button icon on the project card; leave empty ("") to hide the icon
     type: "pdf",
     embedCode: "",
     fileUrl: "assets/projects/sample-excel-report.pdf", // replace with your own file
@@ -178,6 +186,7 @@ const projectsData = [
     tags: ["Google Looker Studio", "Data Visualization"],
     previewImage: "assets/project_preview/looker-studio.jpg", // card thumbnail — replace with your own screenshot
     date: "March 2024",
+    youtubeUrl: "", // EDIT: paste a YouTube video URL here to show a play-button icon on the project card; leave empty ("") to hide the icon
     type: "embed",
     embedCode: `<iframe width="600" height="450" src="https://datastudio.google.com/embed/reporting/759c5295-5cc6-4512-a7e8-6bca7827c762/page/NbXOF" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>`,
     fileUrl: "",
@@ -193,6 +202,7 @@ const projectsData = [
     tags: ["Python", "Streamlit", "Pandas"],
     previewImage: "assets/project_preview/Call_Statement_Analysis.jpg", // card thumbnail — replace with your own screenshot
     date: "February 2024",
+    youtubeUrl: "", // EDIT: paste a YouTube video URL here to show a play-button icon on the project card; leave empty ("") to hide the icon
     type: "embed",
     // NOTE: Streamlit Cloud apps only embed reliably with a single
     // "?embedded=true" query parameter. Adding other params alongside it
