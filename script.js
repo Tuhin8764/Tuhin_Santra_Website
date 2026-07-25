@@ -125,6 +125,19 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderGrid() {
+    // Small red play-button icon shown on a project's thumbnail, only when
+  // that project has a "youtubeUrl" set in projects-data.js. Clicking it
+  // opens the video on YouTube in a new tab — it doesn't affect or open
+  // the "View Project" popup at all, the two are independent.
+  function youtubeButtonHTML(project) {
+    if (!project.youtubeUrl) return ""; // no link set -> icon simply isn't rendered
+    return `
+      <a class="project-youtube-btn" href="${project.youtubeUrl}" target="_blank"
+         rel="noopener" aria-label="Watch on YouTube" title="Watch on YouTube"
+         onclick="event.stopPropagation()">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+      </a>`;
+  }
     const list =
       activeCategory === "All"
         ? projectsData
@@ -139,9 +152,10 @@ document.addEventListener("DOMContentLoaded", () => {
       .map(
         (project) => `
         <div class="project-card reveal is-visible">
-          <div class="project-thumb">
+           <div class="project-thumb">
             ${thumbHTML(project)}
             <span class="project-type-badge">${project.type}</span>
+            ${youtubeButtonHTML(project)}
           </div>
          <div class="project-body">
             <div class="project-meta-row">
