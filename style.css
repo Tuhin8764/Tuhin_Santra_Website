@@ -507,7 +507,7 @@ section { padding: 96px 0; position: relative; }
 .cert-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 
 .cert-card {
-  height: 240px;
+  height: 280px;
   perspective: 1400px; /* how "deep" the 3D flip looks */
   cursor: pointer;
   outline: none;
@@ -552,9 +552,25 @@ section { padding: 96px 0; position: relative; }
   display: flex; align-items: center; justify-content: center;
   font-size: 15px; margin-bottom: 6px;
 }
-.cert-card h3 { font-size: 15.5px; }
+.cert-card h3 {
+  font-size: 15.5px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 .cert-card h4 { font-size: 13px; font-weight: 500; color: var(--ink-soft); }
-.cert-card p { font-size: 13.5px; color: var(--ink-soft); margin-top: 4px; }
+.cert-card p {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  margin-top: 4px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 
 /* "Click to flip" hint, bottom-right of the front face */
 .cert-flip-hint {
@@ -721,6 +737,27 @@ section { padding: 96px 0; position: relative; }
   background: rgba(7,10,16,0.75); color: #fff;
   padding: 3px 8px; border-radius: 5px; text-transform: uppercase; letter-spacing: 0.04em;
 }
+
+/* YouTube play button, top-left of the thumbnail (mirrors the type badge
+   on the top-right). Only rendered when a project has "youtubeUrl" set in
+   projects-data.js — see youtubeButtonHTML() in script.js. */
+.project-youtube-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(224, 34, 34, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+  transition: transform 0.15s ease, background 0.15s ease;
+  z-index: 2;
+}
+.project-youtube-btn:hover { transform: scale(1.08); background: #e60000; }
+.project-youtube-btn svg { width: 15px; height: 15px; fill: #fff; margin-left: 1px; }
 
 .project-body { padding: 20px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
 .project-meta-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
